@@ -1,10 +1,11 @@
-import { UnitCardEditor } from './components';
+import { UnitCardEditor, UnitCardList } from './components';
 
 function App() {
 
   return (
     <>
       <UnitCardEditor/>
+      <UnitCardList/>
     </>
   );
 }
