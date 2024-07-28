@@ -1,11 +1,13 @@
-import { UnitCardEditor, UnitCardList } from './components';
+import { ModalRoot } from './components';
+import { UnitsPage } from './pages/UnitsPage';
 
 function App() {
 
   return (
     <>
-      <UnitCardEditor/>
-      <UnitCardList/>
+      <ModalRoot>
+        <UnitsPage/>
+      </ModalRoot>
     </>
   );
 }

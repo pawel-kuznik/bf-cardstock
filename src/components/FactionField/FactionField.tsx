@@ -12,4 +12,8 @@ export interface FactionFieldProps {
  */
 export function FactionField() {
 
+    return (
+        <div>
+        </div>
+    );
 };
