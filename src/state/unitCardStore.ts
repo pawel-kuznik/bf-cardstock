@@ -8,12 +8,14 @@ export interface UnitCardStore {
     /**
      *  The current cards in the store.
      */
-    cards: { [key: string] : UnitCard },
+    cards: { [key: string] : UnitCard };
 
     /**
      *  Store a new card. The card will be stored under a given id.
      */
-    store: (card: UnitCard) => void,
+    store: (card: UnitCard) => void;
+
+    remove: (card: UnitCard | string) => void;
 };
 
 /**
@@ -31,6 +33,9 @@ export const useUnitCardStore = create<UnitCardStore>()(
                     ...{ [ card.id]: card }
                 }
             }))
+        },
+        remove: (card: UnitCard | string) => {
+            
         }
     }), {
         name: "unit-cards",

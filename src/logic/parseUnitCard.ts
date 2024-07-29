@@ -1,4 +1,4 @@
-import { UnitCard } from "../state";
+import { TranslatedNames, UnitCard } from "../state";
 import { clearObject } from "../utils/clearObject";
 import { prepareMotivationRating } from "./prepareMotivationRating";
 import { prepareSkillRating } from "./prepareSkillRating";
@@ -35,5 +35,25 @@ export function parseUnitCard(input: object) : UnitCard {
 
     filled.skillRating = prepareSkillRating(skillRating);
 
+    filled.name = findNames(input);
+
     return prepareUnitCard(filled);
+};
+
+function findNames(input: object) : TranslatedNames {
+
+    const supportedLanguages = [ "en" ];
+
+    const names : TranslatedNames = { };
+
+    for (const lang of supportedLanguages) {
+
+        const langProp = `${lang}.name`;
+
+        if (langProp in input) {
+            names[lang] = String((input as any)[langProp])
+        }
+    }
+
+    return names;
 };

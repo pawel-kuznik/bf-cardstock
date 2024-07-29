@@ -1,8 +1,13 @@
 import { MotivationRating } from "./motivationRating";
 import { SkillRating } from "./skillRating";
 
+export interface TranslatedNames {
+    [ key: string ]: string
+};
+
 export interface UnitCard {
     id: string;
+    name: TranslatedNames;
     descriptor: string;
     motivationRating: MotivationRating;
     skillRating: SkillRating;

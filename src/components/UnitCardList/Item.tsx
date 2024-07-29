@@ -1,4 +1,5 @@
 import { UnitCard } from "../../state";
+import { UnitCardPreview } from "../UnitCardPreview";
 
 export interface ItemProps {
     card: UnitCard;
@@ -8,9 +9,10 @@ export interface ItemProps {
  *  A list item of a specific card.
  */
 export function Item({ card }: ItemProps) {
+
+    
+
     return (
-        <div>
-            {card.descriptor} ({card.id})
-        </div>
+        <UnitCardPreview unitCard={card}/>
     );
 };

@@ -11,6 +11,7 @@ export function prepareUnitCard(initial: Partial<UnitCard> | undefined = undefin
     const base = {
         id: initial?.id ? initial.id : uuid(),
         descriptor: '',
+        name: { },
         motivationRating: {
             morale: 0,
             rating: 0,
