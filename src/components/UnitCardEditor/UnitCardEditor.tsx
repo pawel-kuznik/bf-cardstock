@@ -1,4 +1,5 @@
 import { parseUnitCard } from "../../logic/parseUnitCard";
+import { UnitCard } from "../../state";
 import { useUnitCardStore } from "../../state/unitCardStore";
 import { BasicForm } from "../BasicForm";
 import { Button } from "../Button";
@@ -7,15 +8,26 @@ import { FormField } from "../FormField";
 
 export interface UnitCardEditorProps {
 
+    /**
+     *  An optional unit card that should be edited instead of making a new one.
+     */
+    unitCard?: UnitCard;
+
+    /**
+     *  A callback to be called when the unit card is stored.
+     */
     onStore?: () => void;
 
+    /**
+     *  A callback to be called when the user wants to close the editor. 
+     */
     onClose?: () => void;
 };
 
 /**
  *  This is a component that can edit a specific unit card. 
  */
-export function UnitCardEditor({ onStore, onClose }: UnitCardEditorProps) {
+export function UnitCardEditor({ unitCard, onStore, onClose }: UnitCardEditorProps) {
 
     const { store } = useUnitCardStore();
 
@@ -41,6 +53,7 @@ export function UnitCardEditor({ onStore, onClose }: UnitCardEditorProps) {
 
     return (
         <BasicForm onSubmit={handleSubmit}>
+            <input type="hidden" name="id" value={unitCard?.id}/>
             <EditorHeader title="Define unit card" controls={controls}/>
             
             <FormField label="Descriptor" name="descriptor"/>

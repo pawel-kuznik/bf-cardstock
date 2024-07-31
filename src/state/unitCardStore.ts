@@ -15,6 +15,9 @@ export interface UnitCardStore {
      */
     store: (card: UnitCard) => void;
 
+    /**
+     *  Remove a unit card by an instance of that card or an id.
+     */
     remove: (card: UnitCard | string) => void;
 };
 
@@ -32,10 +35,24 @@ export const useUnitCardStore = create<UnitCardStore>()(
                     ...state.cards,
                     ...{ [ card.id]: card }
                 }
-            }))
+            }));
         },
         remove: (card: UnitCard | string) => {
             
+            const id = typeof(card) === "string" ? card : card.id;
+
+            if (!id) return;
+
+            set(state => {
+
+                const cards = { ...state.cards };
+                delete cards[id];
+                
+                return {
+                    ...state,
+                    ...{ cards } 
+                };
+            });         
         }
     }), {
         name: "unit-cards",

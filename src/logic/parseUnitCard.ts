@@ -17,6 +17,8 @@ export function parseUnitCard(input: object) : UnitCard {
 
     const filled : Partial<UnitCard> = { };
 
+    if ("id" in input && !!input.id) filled.id = String(input.id);
+
     if ("descriptor" in input) filled.descriptor = String(input.descriptor);
 
     const motivationRating = prepareMotivationRating();

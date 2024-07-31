@@ -38,4 +38,15 @@ describe("parseUnitCard", () => {
         expect(unitCard.skillRating.counterAttack).toEqual(2);
         expect(unitCard.skillRating.assault).toEqual(4);
     });
+
+    it('should parse id when it is inside the input', () => {
+
+        const input = {
+            id: "test-id"
+        };
+
+        const unitCard = parseUnitCard(input);
+
+        expect(unitCard.id).toEqual("test-id");
+    });
 });

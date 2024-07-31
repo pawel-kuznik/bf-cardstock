@@ -7,10 +7,8 @@ export function UnitsPage() {
     const { show } = useModalControls();
 
     const handleCreateCard = () => {
-
-        console.log("show card");
         show("create-unit-card", UnitCardEditorDialog, { });    
-      };
+    };
     
 
     return (
