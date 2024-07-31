@@ -1,6 +1,7 @@
 import { createJSONStorage, persist } from "zustand/middleware";
 import { UnitCard } from "./unitCard";
 import { create } from "zustand";
+import { omitFromObject } from "../utils";
 
 
 export interface UnitCardStore {
@@ -40,19 +41,12 @@ export const useUnitCardStore = create<UnitCardStore>()(
         remove: (card: UnitCard | string) => {
             
             const id = typeof(card) === "string" ? card : card.id;
-
             if (!id) return;
 
-            set(state => {
-
-                const cards = { ...state.cards };
-                delete cards[id];
-                
-                return {
-                    ...state,
-                    ...{ cards } 
-                };
-            });         
+            set(state => ({
+                ...state,
+                ...{ cards: omitFromObject(state.cards, id) }
+            }));         
         }
     }), {
         name: "unit-cards",

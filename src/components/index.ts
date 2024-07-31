@@ -15,3 +15,4 @@ export * from "./UnitCardEditorDialog";
 export * from "./UnitCardList";
 export * from "./UnitCardPreview";
 export * from "./UnitName";
+export * from "./UnitRating";

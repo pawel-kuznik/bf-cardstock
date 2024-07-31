@@ -21,4 +21,4 @@ export function clearObject<T>(input: T, options?: Partial<ClearObjectOptions>):
     }
 
     return copy;
-}
+};
