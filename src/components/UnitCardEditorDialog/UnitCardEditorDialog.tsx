@@ -1,5 +1,5 @@
 import { UnitCard } from "../../state";
-import { DialogFrame } from "../DialogFrame";
+import { DialogFrame } from "@pawel-kuznik/react-faceplate";
 import { UnitCardEditor } from "../UnitCardEditor/UnitCardEditor";
 
 export interface UnitCardEditorDialogProps {
@@ -27,7 +27,7 @@ export function UnitCardEditorDialog({ unitCard, onClose }: UnitCardEditorDialog
     };
     
     return (
-        <DialogFrame>
+        <DialogFrame title="Define unit card">
             <UnitCardEditor unitCard={unitCard} onStore={handleStore} onClose={onClose}/>
         </DialogFrame>
     );

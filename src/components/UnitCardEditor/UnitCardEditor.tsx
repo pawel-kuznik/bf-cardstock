@@ -1,11 +1,9 @@
 import { useReducer } from "react";
+import { Button, FormField, BasicForm } from "@pawel-kuznik/react-faceplate";
 import { parseUnitCard } from "../../logic/parseUnitCard";
 import { UnitCard } from "../../state";
 import { useUnitCardStore } from "../../state/unitCardStore";
-import { BasicForm } from "../BasicForm";
-import { Button } from "../Button";
 import { EditorHeader } from "../EditorHeader";
-import { FormField } from "../FormField";
 import { prepareUnitCard } from "../../logic/prepareUnitCard";
 
 export interface UnitCardEditorProps {
@@ -72,13 +70,13 @@ export function UnitCardEditor({ unitCard, onStore, onClose }: UnitCardEditorPro
 
             <FormField label="English name" name="en.name" defaultValue={currentUnitCard.name.en}/>
 
-            <FormField label="Motivation" name="motivationRating.rating" type="number" min={0} max={6}/>
-            <FormField label="Morale" name="motivationRating.morale" type="number" min={0} max={6}/>
-            <FormField label="Remount" name="motivationRating.remount" type="number" min={0} max={6}/>
+            <FormField label="Motivation" name="motivationRating.rating" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.rating}/>
+            <FormField label="Morale" name="motivationRating.morale" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.morale}/>
+            <FormField label="Remount" name="motivationRating.remount" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.remount}/>
 
-            <FormField label="Skill" name="skillRating.rating" type="number" min={0} max={6}/>
-            <FormField label="Counter attack" name="skillRating.counterAttack" type="number" min={0} max={6}/>
-            <FormField label="Assault" name="motivationRating.assault" type="number" min={0} max={6}/>
+            <FormField label="Skill" name="skillRating.rating" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.rating}/>
+            <FormField label="Counter attack" name="skillRating.counterAttack" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.counterAttack}/>
+            <FormField label="Assault" name="skillRating.assault" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.assault}/>
         </BasicForm>
     );
 };

@@ -1,7 +1,7 @@
 import { UnitCard } from "../../state";
+import { Button } from "@pawel-kuznik/react-faceplate";
 import { useUnitCardStore } from "../../state/unitCardStore";
-import { Button } from "../Button";
-import { useModalControls } from "../Modal/useModalControls";
+import { useModalControls } from "@pawel-kuznik/react-faceplate";
 import { UnitCardEditorDialog } from "../UnitCardEditorDialog";
 import { UnitCardPreview } from "../UnitCardPreview";
 
@@ -27,8 +27,8 @@ export function Item({ card }: ItemProps) {
 
     const controls = (
         <>
-            <Button onClick={handleEdit} label="Edit"/>
-            <Button onClick={handleRemove} label="Remove"/>
+            <Button onClick={handleEdit} size="mini" style="blue"/>
+            <Button onClick={handleRemove} size="mini" style="red"/>
         </>
     );
 

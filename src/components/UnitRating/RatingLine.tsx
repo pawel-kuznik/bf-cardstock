@@ -4,11 +4,9 @@ export interface RatingLineProps {
 };
 
 export function RatingLine({ rating, label }: RatingLineProps) {
-
     return (
         <div>
-            <span>{rating}</span>
-            <span>{label}</span>
+            <span>{label}</span> <span>{rating}+</span>
         </div>
     );
 };

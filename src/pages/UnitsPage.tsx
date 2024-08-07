@@ -1,5 +1,5 @@
-import { Button, UnitCardList } from "../components";
-import { useModalControls } from "../components/Modal/useModalControls";
+import { UnitCardList } from "../components";
+import { Button, useModalControls } from "@pawel-kuznik/react-faceplate";
 import { UnitCardEditorDialog } from "../components/UnitCardEditorDialog";
 
 export function UnitsPage() {
