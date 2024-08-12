@@ -1,10 +1,12 @@
 import { useReducer } from "react";
-import { Button, FormField, BasicForm } from "@pawel-kuznik/react-faceplate";
+import { Button, FormField, BasicForm, Grid } from "@pawel-kuznik/react-faceplate";
 import { parseUnitCard } from "../../logic/parseUnitCard";
-import { UnitCard } from "../../state";
+import { UnitCard, UnitCardVariant } from "../../state";
 import { useUnitCardStore } from "../../state/unitCardStore";
 import { EditorHeader } from "../EditorHeader";
 import { prepareUnitCard } from "../../logic/prepareUnitCard";
+import { prepareUnitVariant } from "../../logic/prepareUnitVariant";
+import { UnitVariantLine } from "./UnitVariantLine";
 
 export interface UnitCardEditorProps {
 
@@ -37,11 +39,9 @@ export function UnitCardEditor({ unitCard, onStore, onClose }: UnitCardEditorPro
 
     const [ currentUnitCard, changeUnitCard ] = useReducer(composeUnitCard, { }, () => unitCard || prepareUnitCard({ }));
 
-    const handleSubmit = (data: object) => {
+    const handleSubmit = () => {
 
-        const unitCard = parseUnitCard(data);
-        store(unitCard);
-
+        store(currentUnitCard);
         onStore?.();
     };
 
@@ -52,6 +52,34 @@ export function UnitCardEditor({ unitCard, onStore, onClose }: UnitCardEditorPro
     const handleClose = () => {
 
         onClose?.();
+    };
+
+    const handleAddVariant = () => {
+
+        const variant = prepareUnitVariant();
+
+        const newUnitCard = { ...currentUnitCard };
+        newUnitCard.variants.push(variant);
+
+        changeUnitCard(newUnitCard);
+    };
+
+    const handleRemoveVariant = (index: number, variant: UnitCardVariant) => {
+
+        const filteredVariants = currentUnitCard.variants.filter(v => v !== variant);
+
+        const newUnitCard = { ...currentUnitCard };
+        newUnitCard.variants = filteredVariants;
+
+        changeUnitCard(newUnitCard);
+    };
+
+    const handleChangeVariant = (index: number, variant: UnitCardVariant) => {
+
+        const newUnitCard = { ...currentUnitCard };
+        newUnitCard.variants[index] = variant;
+
+        changeUnitCard(newUnitCard);
     };
 
     const controls = (
@@ -69,14 +97,19 @@ export function UnitCardEditor({ unitCard, onStore, onClose }: UnitCardEditorPro
             <FormField label="Descriptor" name="descriptor" defaultValue={currentUnitCard.descriptor}/>
 
             <FormField label="English name" name="en.name" defaultValue={currentUnitCard.name.en}/>
+            <Grid columns={3} rows={1}>
+                <FormField label="Motivation" name="motivationRating.rating" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.rating}/>
+                <FormField label="Morale" name="motivationRating.morale" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.morale}/>
+                <FormField label="Remount" name="motivationRating.remount" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.remount}/>
+            </Grid>
+            <Grid columns={3} rows={1}>
+                <FormField label="Skill" name="skillRating.rating" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.rating}/>
+                <FormField label="Counter attack" name="skillRating.counterAttack" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.counterAttack}/>
+                <FormField label="Assault" name="skillRating.assault" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.assault}/>
+            </Grid>
+            <Button submit={false} label="Add variant" onClick={handleAddVariant}/>
 
-            <FormField label="Motivation" name="motivationRating.rating" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.rating}/>
-            <FormField label="Morale" name="motivationRating.morale" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.morale}/>
-            <FormField label="Remount" name="motivationRating.remount" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.remount}/>
-
-            <FormField label="Skill" name="skillRating.rating" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.rating}/>
-            <FormField label="Counter attack" name="skillRating.counterAttack" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.counterAttack}/>
-            <FormField label="Assault" name="skillRating.assault" type="number" min={0} max={6} defaultValue={currentUnitCard.skillRating.assault}/>
+            {currentUnitCard.variants.map((v, idx) => (<UnitVariantLine key={idx} variant={v} index={idx} onRemove={handleRemoveVariant} onChange={handleChangeVariant}/>))}
         </BasicForm>
     );
 };

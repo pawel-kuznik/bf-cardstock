@@ -11,10 +11,10 @@ export interface UnitCard {
     descriptor: string;
     motivationRating: MotivationRating;
     skillRating: SkillRating;
-    variants: UnitCardVariance[];
+    variants: UnitCardVariant[];
 };
 
-export interface UnitCardVariance {
+export interface UnitCardVariant {
     descriptor: string;
     armor: ArmorRating;
     movement: MovementRating;
@@ -29,7 +29,7 @@ export interface ArmorRating {
 };
 
 export interface MovementRating {
-    tactival: number;
+    tactical: number;
     terrainDash: number;
     crossCountry: number;
     roadDash: number;
