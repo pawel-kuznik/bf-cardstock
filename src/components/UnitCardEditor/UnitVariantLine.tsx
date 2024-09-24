@@ -27,7 +27,6 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
     const movementRoadRef = useRef<string>(String(variant.movement.roadDash));
     const movementCrossRef = useRef<string>(String(variant.movement.cross));
 
-    
     const handleChange = () => {
 
         const data = {
@@ -53,7 +52,7 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
     };
 
     const controls = (
-        <Button submit={false} size="mini" style="red" onClick={handleRemove}/>
+        <Button submit={false} size="mini" color="red" onClick={handleRemove}/>
     );
       
     return (
@@ -75,7 +74,6 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
                     <FormField label="Road dash" type="number" valueRef={movementRoadRef}/>
                     <FormField label="Cross" type="number" valueRef={movementCrossRef}/>
                 </Grid>
-
             </div>
         </ContentBox>
     );

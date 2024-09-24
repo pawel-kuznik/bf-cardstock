@@ -1,5 +1,4 @@
-import { FormFieldLayout } from "../FormFieldLayout";
-
+import { FormFieldLayout } from "@pawel-kuznik/react-faceplate";
 import "./JSONField.css";
 
 export interface JSONFieldProps {
@@ -10,7 +9,6 @@ export interface JSONFieldProps {
 };
 
 export function JSONField({ label, name, defaultValue = "" } : JSONFieldProps) {
-
     return (
         <FormFieldLayout label={label}>
             <textarea name={name} className="jsonfield" rows={20} defaultValue={defaultValue}></textarea>

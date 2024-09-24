@@ -27,7 +27,7 @@ export function UnitCardEditorDialog({ unitCard, onClose }: UnitCardEditorDialog
     };
     
     return (
-        <DialogFrame title="Define unit card">
+        <DialogFrame title="Define unit card" width={800}>
             <UnitCardEditor unitCard={unitCard} onStore={handleStore} onClose={onClose}/>
         </DialogFrame>
     );
