@@ -1,24 +1,25 @@
 import { createJSONStorage, persist } from "zustand/middleware";
-import { UnitCard } from "./unitCard";
 import { create } from "zustand";
 import { omitFromObject } from "../utils";
+import { ModelType } from "./models";
 
-export interface UnitCardStore {
+
+export interface ModelTypeStore {
     
     /**
      *  The current cards in the store.
      */
-    cards: { [key: string] : UnitCard };
+    modelTypes: { [key: string] : ModelType };
 
     /**
      *  Store a new card. The card will be stored under a given id.
      */
-    store: (card: UnitCard) => void;
+    store: (card: ModelType) => void;
 
     /**
      *  Remove a unit card by an instance of that card or an id.
      */
-    remove: (card: UnitCard | string) => void;
+    remove: (card: ModelType | string) => void;
 };
 
 /**
@@ -26,29 +27,29 @@ export interface UnitCardStore {
  *  with cards from a given data source, but this is something that will
  *  come at a later time. 
  */
-export const useUnitCardStore = create<UnitCardStore>()(
-    persist<UnitCardStore>((set) => ({
-        cards: { },
-        store: (card: UnitCard) => {
+export const useModelTypeStore = create<ModelTypeStore>()(
+    persist<ModelTypeStore>((set) => ({
+        modelTypes: { },
+        store: (modelType: ModelType) => {
             set(state => ({
-                cards: { 
-                    ...state.cards,
-                    ...{ [ card.id]: card }
+                modelTypes: { 
+                    ...state.modelTypes,
+                    ...{ [ modelType.id]: modelType }
                 }
             }));
         },
-        remove: (card: UnitCard | string) => {
+        remove: (modelType: ModelType | string) => {
             
-            const id = typeof(card) === "string" ? card : card.id;
+            const id = typeof(modelType) === "string" ? modelType : modelType.id;
             if (!id) return;
 
             set(state => ({
                 ...state,
-                ...{ cards: omitFromObject(state.cards, id) }
+                ...{ modelTypes: omitFromObject(state.modelTypes, id) }
             }));         
         }
     }), {
-        name: "unit-cards",
+        name: "model-types",
         storage: createJSONStorage(() => localStorage)
     })
 );

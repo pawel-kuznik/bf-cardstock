@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RulesPage } from "./pages/RulesPage";
 
 import "@pawel-kuznik/react-faceplate/lib/themes/nostalgia-neon/index.css";
+import { ModelTypesPage } from "./pages/ModelTypesPage";
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<UnitsPage />} />
             <Route path="/units" element={<UnitsPage />} />
             <Route path="/rules" element={<RulesPage />} />
+            <Route path="/model-types" element={<ModelTypesPage/>}/>
           </Routes>
         </ModalRoot>
       </BrowserRouter>
