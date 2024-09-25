@@ -27,8 +27,8 @@ export function Item({ card }: ItemProps) {
 
     const controls = (
         <>
-            <Button onClick={handleEdit} size="mini" style="blue"/>
-            <Button onClick={handleRemove} size="mini" style="red"/>
+            <Button onClick={handleEdit} size="mini" color="blue"/>
+            <Button onClick={handleRemove} size="mini" color="red"/>
         </>
     );
 
