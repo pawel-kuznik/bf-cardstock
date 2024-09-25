@@ -83,10 +83,14 @@ export function UnitCardEditor({ unitCard, onStore, onClose }: UnitCardEditorPro
             <BasicForm onSubmit={handleSubmit}>
                 <input type="hidden" name="id" value={currentUnitCard?.id}/>
                 <EditorHeader title="Define unit card" controls={controls}/>
-                
-                <FormField label="Descriptor" name="descriptor" defaultValue={currentUnitCard.descriptor}/>
-
-                <FormField label="English name" name="en.name" defaultValue={currentUnitCard.name.en}/>
+                <Grid columns={3} rows={1}>
+                    <Grid.Cell xSpan={2}>
+                        <FormField label="English name" name="en.name" defaultValue={currentUnitCard.name.en}/>
+                    </Grid.Cell>
+                    <Grid.Cell xSpan={1}>
+                        <FormField label="Descriptor" name="descriptor" defaultValue={currentUnitCard.descriptor}/>
+                    </Grid.Cell>
+                </Grid>
                 <Grid columns={3} rows={1}>
                     <FormField label="Motivation" name="motivationRating.rating" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.rating}/>
                     <FormField label="Morale" name="motivationRating.morale" type="number" min={0} max={6} defaultValue={currentUnitCard.motivationRating.morale}/>

@@ -18,7 +18,7 @@ export interface UnitCardVariant {
     descriptor: string;
     armor: ArmorRating;
     movement: MovementRating;
-    cost: UnitCost[];
+    cost: UnitComposition[];
 };
 
 export interface ArmorRating {
@@ -46,7 +46,11 @@ export interface Weapon {
     notes: string;
 };
 
-export interface UnitCost {
+export interface UnitComposition {
+    models: UnitCompositionModels[]
+};
+
+export interface UnitCompositionModels {
+    model: string;
     count: number;
-    total: number;
 };

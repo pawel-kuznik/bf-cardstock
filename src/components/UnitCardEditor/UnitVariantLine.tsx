@@ -1,7 +1,9 @@
 import { Button, ContentBox, FormField, Grid } from "@pawel-kuznik/react-faceplate";
-import { UnitCardVariant } from "../../state";
+import { UnitCardVariant, UnitComposition } from "../../state";
 import { parseUnitVariant } from "../../logic/parseUnitVariant";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { UnitCompositionLine } from "./UnitCompositionLine";
+import { prepareUnitComposition } from "../../logic/prepareUnitComposition";
 
 export interface UnitVariantLineProps {
 
@@ -27,6 +29,8 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
     const movementRoadRef = useRef<string>(String(variant.movement.roadDash));
     const movementCrossRef = useRef<string>(String(variant.movement.cross));
 
+    const [ compositions, setCompositions] = useState<UnitComposition[]>([]);
+
     const handleChange = () => {
 
         const data = {
@@ -51,6 +55,11 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
         onRemove(index, variant);
     };
 
+    const handleAddComposition = () => {
+
+        setCompositions([...compositions, prepareUnitComposition()]);
+    };
+
     const controls = (
         <Button submit={false} size="mini" color="red" onClick={handleRemove}/>
     );
@@ -59,14 +68,12 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
         <ContentBox sideToolbar={controls}>
             <div onChange={handleChange}>
                 <FormField label="Name" type="text" valueRef={descriptorRef}/>
-
                 <Grid columns={4} rows={1}>
                     <FormField label="Is hit on" type="number" valueRef={armorHitRef}/>
                     <FormField label="Front armor" type="number" valueRef={armorFrontRef}/>
                     <FormField label="Side armor" type="number" valueRef={armorSideRef}/>
                     <FormField label="Top armor" type="number" valueRef={armorTopRef}/>
                 </Grid>
-
                 <Grid columns={5} rows={1}>
                     <FormField label="Tactical movement" type="number" valueRef={movementTacticalRef}/>
                     <FormField label="Terrain dash" type="number" valueRef={movementTerrainRef}/>
@@ -75,6 +82,8 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
                     <FormField label="Cross" type="number" valueRef={movementCrossRef}/>
                 </Grid>
             </div>
+            <Button label="Add unit composition" onClick={handleAddComposition}/>
+            {compositions.map((c, idx) => (<UnitCompositionLine key={idx} composition={c} index={idx}/>))}
         </ContentBox>
     );
 };
