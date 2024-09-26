@@ -29,10 +29,9 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
     const movementRoadRef = useRef<string>(String(variant.movement.roadDash));
     const movementCrossRef = useRef<string>(String(variant.movement.cross));
 
-    const [ compositions, setCompositions] = useState<UnitComposition[]>([]);
+    const [ compositions, setCompositions] = useState<UnitComposition[]>(variant.composition);
 
-    const handleChange = () => {
-
+    const parseFromCurrent = () => {
         const data = {
             "descriptor": descriptorRef.current,
             "armor.isHitOn": armorHitRef.current,
@@ -46,7 +45,12 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
             "movement.cross": movementCrossRef.current
         };
 
-        const parsed = parseUnitVariant(data);
+        return parseUnitVariant(data);
+    };
+
+    const handleChange = () => {
+        const parsed = parseFromCurrent();        
+        parsed.composition = compositions;
         onChange(index, parsed);
     };
 
@@ -58,6 +62,16 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
     const handleAddComposition = () => {
 
         setCompositions([...compositions, prepareUnitComposition()]);
+    };
+
+    const createUnitCompositionHandler = (idx: number) => (unitComposition: UnitComposition) => {
+        const copy = [ ...compositions ];
+        copy[idx] = unitComposition;
+        setCompositions(copy);
+
+        const parsed = parseFromCurrent();
+        parsed.composition = copy;
+        onChange(index, parsed);
     };
 
     const controls = (
@@ -83,7 +97,7 @@ export function UnitVariantLine({ index, variant, onChange, onRemove }: UnitVari
                 </Grid>
             </div>
             <Button label="Add unit composition" onClick={handleAddComposition}/>
-            {compositions.map((c, idx) => (<UnitCompositionLine key={idx} composition={c} index={idx}/>))}
+            {compositions.map((c, idx) => (<UnitCompositionLine key={idx} composition={c} index={idx} onChange={createUnitCompositionHandler(idx)}/>))}
         </ContentBox>
     );
 };

@@ -18,7 +18,7 @@ export interface UnitCardVariant {
     descriptor: string;
     armor: ArmorRating;
     movement: MovementRating;
-    cost: UnitComposition[];
+    composition: UnitComposition[];
 };
 
 export interface ArmorRating {
