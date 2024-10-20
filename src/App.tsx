@@ -5,6 +5,7 @@ import { RulesPage } from "./pages/RulesPage";
 
 import "@pawel-kuznik/react-faceplate/lib/themes/nostalgia-neon/index.css";
 import { ModelTypesPage } from "./pages/ModelTypesPage";
+import { FormationPage } from "./pages/FormationsPage";
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <ModalRoot>
           <nav>
             <Link to="/units">Unit data cards</Link>
+            <Link to="formations">Formations</Link>
             <Link to="/rules">Rules</Link>
             <Link to="/model-types">Model types</Link>
           </nav>
@@ -22,6 +24,7 @@ function App() {
             <Route path="/units" element={<UnitsPage />} />
             <Route path="/rules" element={<RulesPage />} />
             <Route path="/model-types" element={<ModelTypesPage/>}/>
+            <Route path="/formations" element={<FormationPage/>}/>
           </Routes>
         </ModalRoot>
       </BrowserRouter>

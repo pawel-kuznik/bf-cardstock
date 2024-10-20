@@ -20,7 +20,7 @@ export function prepareUnitVariant(initial: Partial<UnitCardVariant> | undefined
             roadDash: 0,
             cross: 0
         },
-        cost: []
+        composition: []
     };
 
     return { ...base, ...initial };
