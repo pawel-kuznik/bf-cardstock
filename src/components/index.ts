@@ -1,5 +1,6 @@
 import "./components.css";
 
+export * from "./AppNavigation";
 export * from "./EditorHeader";
 export * from "./JSONField";
 export * from "./ModelTypeEditor";

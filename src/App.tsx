@@ -1,35 +1,34 @@
-import { ModalRoot } from "@pawel-kuznik/react-faceplate";
-import { UnitsPage } from './pages/UnitsPage';
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
-import { RulesPage } from "./pages/RulesPage";
+import { Grid, ModalRoot, Page } from "@pawel-kuznik/react-faceplate";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { FormationPage, ModelTypesPage, RulesPage, UnitsPage } from "./pages";
+import { AppNavigation } from "./components";
 
 import "@pawel-kuznik/react-faceplate/lib/themes/nostalgia-neon/index.css";
-import { ModelTypesPage } from "./pages/ModelTypesPage";
-import { FormationPage } from "./pages/FormationsPage";
 
 function App() {
 
-  return (
-    <>
-      <BrowserRouter>
-        <ModalRoot>
-          <nav>
-            <Link to="/units">Unit data cards</Link>
-            <Link to="formations">Formations</Link>
-            <Link to="/rules">Rules</Link>
-            <Link to="/model-types">Model types</Link>
-          </nav>
-          <Routes>
-            <Route path="/" element={<UnitsPage />} />
-            <Route path="/units" element={<UnitsPage />} />
-            <Route path="/rules" element={<RulesPage />} />
-            <Route path="/model-types" element={<ModelTypesPage/>}/>
-            <Route path="/formations" element={<FormationPage/>}/>
-          </Routes>
-        </ModalRoot>
-      </BrowserRouter>
-    </>
-  );
+    return (
+        <BrowserRouter>
+            <ModalRoot>
+                <Page>
+                    <Grid columns={8} rows={1}>
+                        <Grid.Cell>
+                            <AppNavigation />
+                        </Grid.Cell>
+                        <Grid.Cell xSpan={7}>
+                            <Routes>
+                                <Route path="/" element={<UnitsPage />} />
+                                <Route path="/units" element={<UnitsPage />} />
+                                <Route path="/rules" element={<RulesPage />} />
+                                <Route path="/model-types" element={<ModelTypesPage />} />
+                                <Route path="/formations" element={<FormationPage />} />
+                            </Routes>
+                        </Grid.Cell>
+                    </Grid>
+                </Page>
+            </ModalRoot>
+        </BrowserRouter>
+    );
 }
 
 export default App
