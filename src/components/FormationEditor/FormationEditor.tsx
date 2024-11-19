@@ -39,6 +39,5 @@ export function FormationEditor({ onStore, onClose }: FormationEditorProps) {
                 <FormField label="Name" name="name"/>
             </BasicForm>
         </>
-        
     );
 };

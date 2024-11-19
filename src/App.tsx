@@ -10,7 +10,7 @@ function App() {
     return (
         <BrowserRouter>
             <ModalRoot>
-                <Page>
+                <Page width="1200px">
                     <Grid columns={8} rows={1}>
                         <Grid.Cell>
                             <AppNavigation />
